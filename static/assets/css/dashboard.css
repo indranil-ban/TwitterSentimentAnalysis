@@ -9,7 +9,7 @@ Dashboard UI
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 :root {
-  --blue: #467fcf;
+  --blue: #023e7d;
   --indigo: #6574cd;
   --purple: #a55eea;
   --pink: #f66d9b;
@@ -17,6 +17,9 @@ Dashboard UI
   --orange: #fd9644;
   --yellow: #f1c40f;
   --green: #5eba00;
+  --positive: #006400;
+  --negative: #008000;
+  --nutral: #70e000;
   --teal: #2bcbba;
   --cyan: #17a2b8;
   --white: #fff;
