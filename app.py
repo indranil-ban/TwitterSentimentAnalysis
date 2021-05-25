@@ -169,7 +169,7 @@ def get_app():
 
             # Test
             print(pos_tweets, neu_tweets, neg_tweets)
-        return render_template("index.html", positive=positive, negative=negative, neutral=neutral, total_tweets = total_tweets)
+        return render_template("index.html", positive=positive, negative=negative, neutral=neutral, total_tweets = total_tweets, val = val)
 
     @app.route("/abuseDetection", methods=["POST", "GET"])
     def abuseDetection():
@@ -205,7 +205,7 @@ def get_app():
             abusive = round(((abuse_tweets * 100)/total_tweets), 1)
         global to_reload
         to_reload = True
-        return render_template("abuseDetection.html", abusive=abusive, nonAbusive=nonAbusive)
+        return render_template("abuseDetection.html", abusive=abusive, nonAbusive=nonAbusive, total_tweets = total_tweets, val = val)
 
     @app.route("/individualTweetCheck", methods=["POST", "GET"])
     def individualTweetCheck():
@@ -234,6 +234,15 @@ def get_app():
         global to_reload
         to_reload = True
         return render_template("individualTweetCheck.html", sentiment=sentiment, ans=ans, ans2=ans2, val = val)
+
+    @app.errorhandler(500)
+    def internal_server_error(e):
+        return render_template('500.html'), 500
+
+    @app.errorhandler(404)
+    def page_not_found(e):
+        return render_template('404.html'), 404
+
     return app
 
 
@@ -253,6 +262,8 @@ class AppReloader(object):
     def __call__(self, environ, start_response):
         app = self.get_application()
         return app(environ, start_response)
+
+
 
 
 # This application object can be used in any WSGI server

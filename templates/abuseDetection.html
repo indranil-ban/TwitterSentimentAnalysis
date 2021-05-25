@@ -30,9 +30,35 @@
     <script src="../static/assets/plugins/charts-c3/plugin.js"></script>
     <!-- Input Mask Plugin -->
     <script src="../static/assets/plugins/input-mask/plugin.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
+    <script>
+        function loading() {
+            $("#loading").show();
+            $(".page").hide();
+            $(".footer").hide();
+        }
+    </script>
+    <style>
+        #loading {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            background-image: url("../static/assets/images/loading/loading.gif");
+            background-repeat: no-repeat;
+            background-position: center;
+            cursor: progress;
+        }
+    </style>
 </head>
 
 <body class="">
+    <div id="loading"></div>
     <div class="page">
         <div class="page-main">
             <div class="header py-4">
@@ -62,20 +88,13 @@
                                     <a href="/" class="nav-link"><i class="fe fe-home"></i> Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/abuseDetection" class="nav-link active"><i class="fa fa-ban"></i> Abuse
+                                    <a href="/abuseDetection" class="nav-link active"><i class="fe fe-minus-circle"></i>
+                                        Abuse
                                         Detection</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/individualTweetCheck" class="nav-link"><i
-                                            class="fa fa-check-circle-o"></i> Individual Tweet Check</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link"><i class="fe fe-alert-triangle"></i>
-                                        Privacy Policy</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link"><i class="fa fa-comments-o"></i>
-                                        Contact Us</a>
+                                    <a href="/individualTweetCheck" class="nav-link"><i class="fe fe-edit"></i>
+                                        Individual Tweet Check</a>
                                 </li>
                             </ul>
                         </div>
@@ -98,20 +117,22 @@
                                 <div class="card-body" style="padding: 1rem 1.5rem 1.5rem 1.5rem;">
                                     <form action="/abuseDetection" method="post">
                                         <div class="form-group">
-                                            <label class="form-label" style="margin-bottom: 1rem;">Enter keyword</label>
+                                            <label class="form-label" style="margin-bottom: 1rem;">Enter
+                                                keyword</label>
                                             <input type="text" class="form-control is-valid"
-                                                name="example-text-input-valid" placeholder="keyword..">
+                                                name="example-text-input-valid" placeholder="keyword.." value="{{val[0]}}">
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label" style="margin-bottom: 0;">On Tweets
-                                                <p id="volValue" style="margin: 0; display: inline; padding-left: 86%;">0</p>
+                                                <p id="volValue" style="margin: 0; display: inline; padding-left: 86%;">
+                                                    {{val[1]}}</p>
                                             </label>
                                             <div class="row align-items-center">
                                                 <div class="col">
-                                                    <input type="range" class="form-control custom-range" step="5" name="vol"
-                                                        min="0" max="3000" oninput="updateValue(this.value)">
+                                                    <input type="range" class="form-control custom-range" step="5"
+                                                        name="vol" min="0" max="3000" oninput="updateValue(this.value)" value="{{val[1]}}">
                                                     <script>
-                                                        function updateValue(val){
+                                                        function updateValue(val) {
                                                             document.getElementById('volValue').innerText = val
                                                         }
                                                     </script>
@@ -119,7 +140,8 @@
                                             </div>
                                         </div>
                                         <div class="form-footer pt-2">
-                                            <button class="btn btn-primary btn-block">Submit</button>
+                                            <button class="btn btn-primary btn-block"
+                                                onclick="loading();">Submit</button>
                                         </div>
                                     </form>
                                 </div>
@@ -130,10 +152,15 @@
                                 <div class="col">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h3 class="card-title">Chart title</h3>
+                                            <h3 class="card-title">Pie Chart</h3>
                                         </div>
                                         <div class="card-body">
-                                            <div id="chart-donut" style="height: 14rem;"></div>
+                                            {% if total_tweets != 0 %}
+                                            <div id="chart-donut" style="height: 217px;"></div>
+                                            {% else %}
+                                            <div class="h5 mb-3 mt-1" style="height: 200px;">Please submit your text
+                                                to show Chart</div>
+                                            {% endif %}
                                         </div>
                                     </div>
                                     <script>
@@ -188,7 +215,6 @@
                             <ul class="list-inline list-inline-dots mb-0">
                                 <li class="list-inline-item"><a href="#">Documentation</a>
                                 </li>
-                                <li class="list-inline-item"><a href="#">FAQ</a></li>
                             </ul>
                         </div>
                         <div class="col-auto">
