@@ -9,10 +9,10 @@ import tweepy
 import pickle
 
 # Twitter API Keys
-consumer_key = '2yQ5So6NP0k8OTDuKEyE5W8bI'
-consumer_secret = 'RcEUgWvKMYOgwedPJwQhwUkEWDboW40AGKDcysSqdYOsmDCBXM'
-access_token = '1235877260407607296-Ata6aQEqfY1BfcK5zsD2522UwRd4e9'
-access_token_secret = 'PjnogWUP87fPwnkluOpL1qAdo8SZH05GESUauZJNo0X8f'
+consumer_key= '2yQ5So6NP0k8OTDuKEyE5W8bI'
+consumer_secret= 'RcEUgWvKMYOgwedPJwQhwUkEWDboW40AGKDcysSqdYOsmDCBXM'
+access_token= '1235877260407607296-Ata6aQEqfY1BfcK5zsD2522UwRd4e9'
+access_token_secret= 'PjnogWUP87fPwnkluOpL1qAdo8SZH05GESUauZJNo0X8f'
 
 # emojis defined
 emoji_pattern = re.compile("["
