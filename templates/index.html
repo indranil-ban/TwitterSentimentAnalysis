@@ -3,44 +3,48 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta http-equiv="Content-Language" content="en" />
-    <meta name="msapplication-TileColor" content="#2d89ef">
-    <meta name="theme-color" content="#4188c9">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="MobileOptimized" content="320">
-    <link rel="icon" href="./favicon.ico" type="image/x-icon" />
-    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Generated: 2018-04-16 09:29:05 +0200 -->
     <title>Twitter Sentiment Analysis</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
     <script src="../static/assets/js/require.min.js"></script>
-    <script>
-        requirejs.config({
-            baseUrl: '.'
-        });
-    </script>
     <!-- Dashboard Core -->
     <link href="../static/assets/css/dashboard.css" rel="stylesheet" />
     <script src="../static/assets/js/dashboard.js"></script>
     <!-- c3.js Charts Plugin -->
     <link href="../static/assets/plugins/charts-c3/plugin.css" rel="stylesheet" />
     <script src="../static/assets/plugins/charts-c3/plugin.js"></script>
-    <!-- Google Maps Plugin -->
-    <link href="../static/assets/plugins/maps-google/plugin.css" rel="stylesheet" />
-    <script src="../static/assets/plugins/maps-google/plugin.js"></script>
-    <!-- Input Mask Plugin -->
-    <script src="../static/assets/plugins/input-mask/plugin.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
+    <script>
+        function loading() {
+            $("#loading").show();
+            $(".page").hide();
+            $(".footer").hide();
+        }
+    </script>
+    <style>
+        #loading {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            background-image: url("../static/assets/images/loading/loading.gif");
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+    </style>
 </head>
 
-<body class="">
+<body>
+    <div id="loading"></div>
     <div class="page">
         <div class="page-main">
             <div class="header py-4">
@@ -70,20 +74,13 @@
                                     <a href="/" class="nav-link active"><i class="fe fe-home"></i> Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/abuseDetection" class="nav-link"><i class="fa fa-ban"></i> Abuse
+                                    <a href="/abuseDetection" class="nav-link"><i class="fe fe-minus-circle"></i>
+                                        Abuse
                                         Detection</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/individualTweetCheck" class="nav-link"><i
-                                            class="fa fa-check-circle-o"></i> Individual Tweet Check</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link"><i class="fe fe-alert-triangle"></i>
-                                        Privacy Policy</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link"><i class="fa fa-comments-o"></i>
-                                        Contact Us</a>
+                                    <a href="/individualTweetCheck" class="nav-link"><i class="fe fe-edit"></i>
+                                        Individual Tweet Check</a>
                                 </li>
                             </ul>
                         </div>
@@ -106,20 +103,22 @@
                                 <div class="card-body" style="padding: 1rem 1.5rem 1.5rem 1.5rem;">
                                     <form action='/' method="post">
                                         <div class="form-group">
-                                            <label class="form-label" style="margin-bottom: 1rem;">Enter keyword</label>
+                                            <label class="form-label" style="margin-bottom: 1rem;">Enter
+                                                keyword</label>
                                             <input type="text" class="form-control is-valid"
-                                                name="example-text-input-valid" placeholder="keyword..">
+                                                name="example-text-input-valid" placeholder="keyword.." value="{{val[0]}}">
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label" style="margin-bottom: 0;">On Tweets
-                                                <p id="volValue" style="margin: 0; display: inline; padding-left: 82%;">0</p>
+                                                <p id="volValue" style="margin: 0; display: inline; padding-left: 82%;">
+                                                    {{val[1]}}</p>
                                             </label>
                                             <div class="row align-items-center">
                                                 <div class="col">
-                                                    <input type="range" class="form-control custom-range" step="5" name="vol"
-                                                        min="0" max="3000" oninput="updateValue(this.value)">
+                                                    <input type="range" class="form-control custom-range" step="5"
+                                                        name="vol" min="0" max="3000" oninput="updateValue(this.value)" value="{{val[1]}}">
                                                     <script>
-                                                        function updateValue(val){
+                                                        function updateValue(val) {
                                                             document.getElementById('volValue').innerText = val
                                                         }
                                                     </script>
@@ -127,7 +126,8 @@
                                             </div>
                                         </div>
                                         <div class="form-footer mt-0">
-                                            <button class="btn btn-primary btn-block" style="cursor: pointer;">Submit</button>
+                                            <button class="btn btn-primary btn-block" style="cursor: pointer;"
+                                                onclick="loading();">Submit</button>
                                         </div>
                                     </form>
                                 </div>
@@ -179,7 +179,9 @@
                                             {% if total_tweets != 0 %}
                                             <div id="chart-donut" style="height: 12rem;"></div>
                                             {% else %}
-                                            <div class="h5 mb-3 mt-1" style="height: 11rem;">Please submit your text to show Chart</div>
+                                            <div class="h5 mb-3 mt-1" style="height: 11rem;">Please submit your text
+                                                to
+                                                show Chart</div>
                                             {% endif %}
                                         </div>
                                     </div>
@@ -231,7 +233,9 @@
                                             {% if total_tweets != 0 %}
                                             <div id="chart-pie" style="height: 12rem;"></div>
                                             {% else %}
-                                            <div class="h5 mb-3 mt-1" style="height: 11rem;">Please submit your text to show Chart</div>
+                                            <div class="h5 mb-3 mt-1" style="height: 11rem;">Please submit your text
+                                                to
+                                                show Chart</div>
                                             {% endif %}
                                         </div>
                                     </div>
@@ -278,7 +282,7 @@
                                     <div class="card">
                                         <div class="card-body text-center" style="height: 9rem;">
                                             <div class="h5">Accuracy</div>
-                                            <div class="display-4 font-weight-bold mb-4">96%</div>
+                                            <div class="display-4 font-weight-bold mb-4">95.20%</div>
                                             <div class="progress progress-sm">
                                                 <div class="progress-bar bg-green" style="width: 96%"></div>
                                             </div>
@@ -301,7 +305,6 @@
                             <ul class="list-inline list-inline-dots mb-0">
                                 <li class="list-inline-item"><a href="#">Documentation</a>
                                 </li>
-                                <li class="list-inline-item"><a href="#">FAQ</a></li>
                             </ul>
                         </div>
                         <div class="col-auto">
