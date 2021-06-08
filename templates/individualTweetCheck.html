@@ -3,17 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta http-equiv="Content-Language" content="en" />
-    <meta name="msapplication-TileColor" content="#2d89ef">
-    <meta name="theme-color" content="#4188c9">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="MobileOptimized" content="320">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Twitter Sentiment Analysis</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet"
@@ -59,20 +50,12 @@
                                     <a href="/" class="nav-link"><i class="fe fe-home"></i> Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/abuseDetection" class="nav-link"><i class="fa fa-ban"></i> Abuse
+                                    <a href="/abuseDetection" class="nav-link"><i class="fe fe-minus-circle"></i> Abuse
                                         Detection</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="/individualTweetCheck" class="nav-link active"><i
-                                            class="fa fa-check-circle-o"></i> Individual Tweet Check</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link"><i class="fe fe-alert-triangle"></i>
-                                        Privacy Policy</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link"><i class="fa fa-comments-o"></i>
-                                        Contact Us</a>
+                                            class="fe fe-edit"></i> Individual Tweet Check</a>
                                 </li>
                             </ul>
                         </div>
@@ -97,7 +80,7 @@
                                         <div>
                                             <label class="form-label" style="margin-bottom: 1rem;">Enter Your
                                                 Text</label>
-                                            <textarea class="form-control" name="example-textarea-input" rows="3" placeholder="Content..">{{val[0]}}</textarea>
+                                            <textarea class="form-control" name="example-textarea-input" rows="2" placeholder="Content..">{{val[0]}}</textarea>
                                         </div>
                                         <div class="form-footer">
                                             <button class="btn btn-primary btn-block">Submit</button>
@@ -107,7 +90,7 @@
                             </div>
                         </div>
                         <div class="col-lg-4">
-                            <div class="card pb-1">
+                            <div class="card">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center pt-3">
                                         <div class="subheader">Sentiment Analysis Report</div>
@@ -121,7 +104,7 @@
                             </div>
 
 
-                            <div class="card pt-2">
+                            <div class="card pt-1">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center pt-3">
                                         <div class="subheader">Abusive Check Report</div>
@@ -151,7 +134,6 @@
                             <ul class="list-inline list-inline-dots mb-0">
                                 <li class="list-inline-item"><a href="#">Documentation</a>
                                 </li>
-                                <li class="list-inline-item"><a href="#">FAQ</a></li>
                             </ul>
                         </div>
                         <div class="col-auto">
